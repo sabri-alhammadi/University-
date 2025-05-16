@@ -1295,6 +1295,30 @@
     else showSection('login');
   }
 </script>
+<script>
+  const loginForm = document.querySelector('form');
+  loginForm.addEventListener('submit', function(e) {
+    e.preventDefault(); // منع إعادة تحميل الصفحة
+
+    const email = loginForm.email.value.trim();
+    const password = loginForm.password.value.trim();
+
+    // تحقق بسيط (يمكنك تحسينه لاحقًا)
+    if(email === "student@example.com" && password === "1234") {
+      alert("تم تسجيل الدخول كطالب");
+      // هنا يمكنك إظهار واجهة الطالب، مثلا تغيير الظهور للـsection المناسب
+      // مثال:
+      document.getElementById('login').classList.add('hidden');
+      document.getElementById('student-dashboard').classList.remove('hidden');
+    } else if(email === "teacher@example.com" && password === "1234") {
+      alert("تم تسجيل الدخول كمدرس");
+      document.getElementById('login').classList.add('hidden');
+      document.getElementById('teacher-dashboard').classList.remove('hidden');
+    } else {
+      alert("بيانات الدخول غير صحيحة");
+    }
+  });
+</script>
 
 </body>
 </html>
