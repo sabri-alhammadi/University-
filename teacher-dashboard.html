@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>لوحة تحكم المدرس</title>
+<style>
+  :root {
+    --dark-green: #0F5E3B;
+    --lime-green: #7DBB43;
+    --light-lime-green: #C9D94A;
+    --white: #FFFFFF;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0; padding: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--white);
+    color: var(--dark-green);
+  }
+  header {
+    background-color: var(--dark-green);
+    padding: 15px 30px;
+    color: var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  header h1 {
+    margin: 0; font-weight: 700; font-size: 1.5rem;
+  }
+  nav a {
+    color: var(--white);
+    margin-left: 25px;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  nav a:hover {
+    color: var(--light-lime-green);
+  }
+  main {
+    padding: 25px 30px;
+  }
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    grid-gap: 25px;
+  }
+  .card {
+    background: var(--lime-green);
+    border-radius: 10px;
+    color: var(--white);
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  ul {
+    padding-left: 15px;
+  }
+  /* Footer */
+  footer {
+    background-color: var(--dark-green);
+    color: var(--white);
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 40px;
+  }
+  @media (max-width: 600px) {
+    .dashboard-grid {
+      grid-template-columns: 1fr;
+    }
+    nav a {
+      margin-left: 15px;
+      font-size: 0.9rem;
+    }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>مرحبا بك، المدرس</h1>
+    <nav>
+      <a href="teacher-dashboard.html">الرئيسية</a>
+      <a href="course-management.html">إدارة الدورات</a>
+      <a href="student-management.html">إدارة الطلاب</a>
+      <a href="assignments-builder.html">إنشاء الاختبارات والواجبات</a>
+      <a href="grading.html">التصحيح والتقييم</a>
+      <a href="reports.html">التقارير</a>
+      <a href="profile.html">ملفي</a>
+      <a href="index.html">تسجيل خروج</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="dashboard-grid">
+      <section class="card">
+        <h2>الدورات التي تدرّسها</h2>
+        <ul>
+          <li>مقدمة في البرمجة - عدد الطلاب: 35 - الاختبارات القادمة</li>
+          <li>أساسيات الرياضيات - عدد الطلاب: 40 - الواجبات الجديدة</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>الإشعارات</h2>
+        <ul>
+          <li>تسليم واجب جديد من طالب</li>
+          <li>اختبار مقرر بتاريخ 22 مايو</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 نظام إدارة التعلم الإلكتروني
+  </footer>
+</body>
+</html>
