@@ -1,115 +1,1300 @@
-<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>تسجيل الدخول - نظام LMS</title>
+<title>نظام إدارة التعلم الإلكتروني (LMS)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 <style>
+  /* Custom colors */
   :root {
     --dark-green: #0F5E3B;
     --lime-green: #7DBB43;
     --light-lime-green: #C9D94A;
-    --white-color: #FFFFFF;
+    --white: #FFFFFF;
   }
-  body {
-    margin: 0; font-family: Arial, sans-serif;
-    background: var(--light-lime-green);
-    display: flex; justify-content: center; align-items: center; min-height: 100vh;
+  /* Scrollbar for forums and messages */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
   }
-  form {
-    background: var(--white-color);
-    padding: 2rem; border-radius: 10px;
-    width: 350px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.15);
-  }
-  h2 {
-    color: var(--dark-green);
-    text-align: center;
-    margin-bottom: 1.8rem;
-    font-weight: 700;
-    font-size: 1.8rem;
-  }
-  label {
-    display: block;
-    margin-bottom: 0.4rem;
-    color: var(--dark-green);
-    font-weight: 600;
-  }
-  input[type="text"],
-  input[type="password"] {
-    width: 100%;
-    padding: 0.6rem;
-    margin-bottom: 1.3rem;
-    border: 2px solid var(--lime-green);
-    border-radius: 6px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-  }
-  input[type="text"]:focus,
-  input[type="password"]:focus {
-    border-color: var(--dark-green);
-    outline: none;
-  }
-  .options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    font-size: 0.9rem;
-    color: var(--dark-green);
-  }
-  .options label {
-    display: flex;
-    align-items: center;
-    font-weight: 400;
-  }
-  .options input[type="checkbox"] {
-    margin-left: 6px;
-    width: 16px; height: 16px;
-  }
-  .options a {
-    color: var(--lime-green);
-    text-decoration: none;
-    font-weight: 600;
-  }
-  .options a:hover {
-    text-decoration: underline;
-  }
-  button {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: var(--dark-green);
-    border: none;
-    border-radius: 7px;
-    color: var(--white-color);
-    font-weight: 700;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  button:hover {
+  .scrollbar-thin::-webkit-scrollbar-thumb {
     background-color: var(--lime-green);
+    border-radius: 3px;
   }
-  @media (max-width: 400px) {
-    form { width: 90%; padding: 1.5rem; }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
   }
 </style>
 </head>
-<body>
-  <form action="student_dashboard.html" method="get" autocomplete="off">
-    <h2>تسجيل الدخول</h2>
-    <label for="user">البريد الإلكتروني / اسم المستخدم</label>
-    <input id="user" name="user" type="text" placeholder="أدخل البريد أو اسم المستخدم" required />
+<body class="bg-white text-gray-900 font-sans">
 
-    <label for="pass">كلمة المرور</label>
-    <input id="pass" name="pass" type="password" placeholder="أدخل كلمة المرور" required />
+<!-- ============================
+  Login Page (Shared for Student, Teacher, Admin)
+============================ -->
+<section id="login" class="min-h-screen flex items-center justify-center bg-white px-4">
+  <div class="max-w-md w-full border border-gray-300 rounded-lg shadow-lg p-8">
+    <h1 class="text-3xl font-bold mb-6 text-center" style="color: var(--dark-green);">تسجيل الدخول</h1>
+    <form class="space-y-5" action="#" method="POST" autocomplete="off">
+      <div>
+        <label for="email" class="block mb-1 font-semibold">البريد الإلكتروني / اسم المستخدم</label>
+        <input id="email" name="email" type="text" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-lime-500" />
+      </div>
+      <div>
+        <label for="password" class="block mb-1 font-semibold">كلمة المرور</label>
+        <input id="password" name="password" type="password" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-lime-500" />
+      </div>
+      <div class="flex items-center justify-between text-sm">
+        <label class="inline-flex items-center space-x-2 rtl:space-x-reverse">
+          <input type="checkbox" name="remember" class="form-checkbox h-4 w-4 text-lime-500" />
+          <span>تذكّرني</span>
+        </label>
+        <a href="#forgot-password" class="text-lime-600 hover:underline">نسيت كلمة المرور؟</a>
+      </div>
+      <button type="submit" class="w-full bg-[var(--dark-green)] hover:bg-[var(--lime-green)] text-white font-bold py-2 rounded-md transition-colors">دخول</button>
+    </form>
+  </div>
+</section>
 
-    <div class="options">
-      <label><input type="checkbox" name="remember" /> تذكّرني</label>
-      <a href="#">نسيت كلمة المرور؟</a>
+<!-- ============================
+  Student Dashboard
+============================ -->
+<section id="student-dashboard" class="hidden min-h-screen bg-white">
+  <header class="bg-[var(--dark-green)] text-white p-4 flex justify-between items-center">
+    <h2 class="text-xl font-bold">لوحة تحكم الطالب</h2>
+    <nav class="space-x-4 rtl:space-x-reverse flex items-center">
+      <a href="#student-dashboard" class="hover:underline">الرئيسية</a>
+      <a href="#student-courses" class="hover:underline">الدورات</a>
+      <a href="#student-assignments" class="hover:underline">الواجبات والاختبارات</a>
+      <a href="#student-grades" class="hover:underline">النتائج</a>
+      <a href="#student-forums" class="hover:underline">المنتديات</a>
+      <a href="#student-profile" class="hover:underline">الملف الشخصي</a>
+      <button id="logout-student" class="ml-4 rtl:mr-4 bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">تسجيل خروج</button>
+    </nav>
+  </header>
+  <main class="p-6 max-w-7xl mx-auto space-y-8">
+    <!-- Summary of current courses with progress -->
+    <section>
+      <h3 class="text-2xl font-bold mb-4" style="color: var(--dark-green);">ملخص الدورات الحالية</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <article class="border border-gray-300 rounded-lg p-4 shadow-sm">
+          <h4 class="font-semibold mb-2">دورة تطوير الويب</h4>
+          <div class="w-full bg-gray-200 rounded-full h-4 mb-2">
+            <div class="bg-[var(--lime-green)] h-4 rounded-full" style="width: 75%;"></div>
+          </div>
+          <p class="text-sm text-gray-700">التقدم: 75%</p>
+        </article>
+        <article class="border border-gray-300 rounded-lg p-4 shadow-sm">
+          <h4 class="font-semibold mb-2">أساسيات البرمجة</h4>
+          <div class="w-full bg-gray-200 rounded-full h-4 mb-2">
+            <div class="bg-[var(--lime-green)] h-4 rounded-full" style="width: 40%;"></div>
+          </div>
+          <p class="text-sm text-gray-700">التقدم: 40%</p>
+        </article>
+        <article class="border border-gray-300 rounded-lg p-4 shadow-sm">
+          <h4 class="font-semibold mb-2">تصميم واجهات المستخدم</h4>
+          <div class="w-full bg-gray-200 rounded-full h-4 mb-2">
+            <div class="bg-[var(--lime-green)] h-4 rounded-full" style="width: 90%;"></div>
+          </div>
+          <p class="text-sm text-gray-700">التقدم: 90%</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Notifications of upcoming tasks -->
+    <section>
+      <h3 class="text-2xl font-bold mb-4" style="color: var(--dark-green);">الإشعارات بالمهام القادمة</h3>
+      <ul class="space-y-3">
+        <li class="border border-gray-300 rounded p-3 flex items-center space-x-3 rtl:space-x-reverse">
+          <i class="fas fa-tasks text-[var(--lime-green)] text-xl"></i>
+          <p>تسليم واجب مادة تطوير الويب يوم 10 مايو 2024</p>
+        </li>
+        <li class="border border-gray-300 rounded p-3 flex items-center space-x-3 rtl:space-x-reverse">
+          <i class="fas fa-file-alt text-[var(--lime-green)] text-xl"></i>
+          <p>اختبار مادة أساسيات البرمجة يوم 15 مايو 2024</p>
+        </li>
+        <li class="border border-gray-300 rounded p-3 flex items-center space-x-3 rtl:space-x-reverse">
+          <i class="fas fa-video text-[var(--lime-green)] text-xl"></i>
+          <p>محاضرة مباشرة في تصميم واجهات المستخدم يوم 12 مايو 2024</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Calendar -->
+    <section>
+      <h3 class="text-2xl font-bold mb-4" style="color: var(--dark-green);">التقويم</h3>
+      <div class="overflow-x-auto border border-gray-300 rounded-lg p-4">
+        <table class="w-full text-center table-fixed">
+          <thead class="bg-[var(--lime-green)] text-white">
+            <tr>
+              <th class="p-2">الأحد</th>
+              <th class="p-2">الاثنين</th>
+              <th class="p-2">الثلاثاء</th>
+              <th class="p-2">الأربعاء</th>
+              <th class="p-2">الخميس</th>
+              <th class="p-2">الجمعة</th>
+              <th class="p-2">السبت</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-2 text-gray-400">28</td>
+              <td class="p-2 text-gray-400">29</td>
+              <td class="p-2 text-gray-400">30</td>
+              <td class="p-2">1</td>
+              <td class="p-2">2</td>
+              <td class="p-2">3</td>
+              <td class="p-2">4</td>
+            </tr>
+            <tr>
+              <td class="p-2">5</td>
+              <td class="p-2">6</td>
+              <td class="p-2 bg-[var(--light-lime-green)] rounded">7<br /><span class="text-xs">محاضرة</span></td>
+              <td class="p-2">8</td>
+              <td class="p-2 bg-[var(--light-lime-green)] rounded">9<br /><span class="text-xs">تسليم واجب</span></td>
+              <td class="p-2">10</td>
+              <td class="p-2">11</td>
+            </tr>
+            <tr>
+              <td class="p-2">12</td>
+              <td class="p-2 bg-[var(--light-lime-green)] rounded">13<br /><span class="text-xs">اختبار</span></td>
+              <td class="p-2">14</td>
+              <td class="p-2">15</td>
+              <td class="p-2">16</td>
+              <td class="p-2">17</td>
+              <td class="p-2">18</td>
+            </tr>
+            <tr>
+              <td class="p-2">19</td>
+              <td class="p-2">20</td>
+              <td class="p-2">21</td>
+              <td class="p-2">22</td>
+              <td class="p-2">23</td>
+              <td class="p-2">24</td>
+              <td class="p-2">25</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Registered Courses List -->
+    <section>
+      <h3 class="text-2xl font-bold mb-4" style="color: var(--dark-green);">الدورات المسجلة</h3>
+      <ul class="space-y-4">
+        <li class="border border-gray-300 rounded-lg p-4 flex justify-between items-center">
+          <div>
+            <h4 class="font-semibold text-lg">دورة تطوير الويب</h4>
+            <p class="text-sm text-gray-600">مدرب: أ. اسامه الأثوري</p>
+          </div>
+          <a href="#student-course-content" class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-4 py-2 rounded">الدخول</a>
+        </li>
+        <li class="border border-gray-300 rounded-lg p-4 flex justify-between items-center">
+          <div>
+            <h4 class="font-semibold text-lg">أساسيات البرمجة</h4>
+            <p class="text-sm text-gray-600">مدرب: أ. نادر محمود</p>
+          </div>
+          <a href="#student-course-content" class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-4 py-2 rounded">الدخول</a>
+        </li>
+        <li class="border border-gray-300 rounded-lg p-4 flex justify-between items-center">
+          <div>
+            <h4 class="font-semibold text-lg">تصميم واجهات المستخدم</h4>
+            <p class="text-sm text-gray-600">مدرب: أ. خالد حسن</p>
+          </div>
+          <a href="#student-course-content" class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-4 py-2 rounded">الدخول</a>
+        </li>
+      </ul>
+    </section>
+  </main>
+</section>
+
+<!-- ============================
+  Student Courses Page
+============================ -->
+<section id="student-courses" class="hidden min-h-screen bg-white">
+  <header class="bg-[var(--dark-green)] text-white p-4 flex justify-between items-center">
+    <h2 class="text-xl font-bold">الدورات المسجلة</h2>
+    <nav class="space-x-4 rtl:space-x-reverse flex items-center">
+      <a href="#student-dashboard" class="hover:underline">الرئيسية</a>
+      <a href="#student-courses" class="hover:underline">الدورات</a>
+      <a href="#student-assignments" class="hover:underline">الواجبات والاختبارات</a>
+      <a href="#student-grades" class="hover:underline">النتائج</a>
+      <a href="#student-forums" class="hover:underline">المنتديات</a>
+      <a href="#student-profile" class="hover:underline">الملف الشخصي</a>
+      <button id="logout-student-2" class="ml-4 rtl:mr-4 bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">تسجيل خروج</button>
+    </nav>
+  </header>
+  <main class="p-6 max-w-5xl mx-auto space-y-8">
+    <ul class="space-y-6">
+      <li class="border border-gray-300 rounded-lg p-6 shadow-sm">
+        <h3 class="text-xl font-bold mb-3" style="color: var(--dark-green);">دورة تطوير الويب</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div>
+            <h4 class="font-semibold mb-2">المحاضرات الفيديو</h4>
+            <ul class="list-disc list-inside space-y-1 text-gray-700">
+              <li><a href="#student-course-content" class="text-[var(--lime-green)] hover:underline">مقدمة في HTML</a></li>
+              <li><a href="#student-course-content" class="text-[var(--lime-green)] hover:underline">CSS للمبتدئين</a></li>
+              <li><a href="#student-course-content" class="text-[var(--lime-green)] hover:underline">جافاسكريبت الأساسي</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-2">ملفات PDF</h4>
+            <ul class="list-disc list-inside space-y-1 text-gray-700">
+              <li><a href="https://placehold.co/600x800/png?text=HTML+Guide" target="_blank" class="text-[var(--lime-green)] hover:underline" download>دليل HTML</a></li>
+              <li><a href="https://placehold.co/600x800/png?text=CSS+Guide" target="_blank" class="text-[var(--lime-green)] hover:underline" download>دليل CSS</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-2">روابط خارجية</h4>
+            <ul class="list-disc list-inside space-y-1 text-gray-700">
+              <li><a href="https://developer.mozilla.org/ar/docs/Web/HTML" target="_blank" class="text-[var(--lime-green)] hover:underline">MDN HTML</a></li>
+              <li><a href="https://developer.mozilla.org/ar/docs/Web/CSS" target="_blank" class="text-[var(--lime-green)] hover:underline">MDN CSS</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-4 flex space-x-4 rtl:space-x-reverse">
+          <a href="#student-forums" class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-4 py-2 rounded">المنتديات</a>
+          <a href="#student-assignments" class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-4 py-2 rounded">الواجبات والاختبارات</a>
+        </div>
+      </li>
+
+      <li class="border border-gray-300 rounded-lg p-6 shadow-sm">
+        <h3 class="text-xl font-bold mb-3" style="color: var(--dark-green);">أساسيات البرمجة</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div>
+            <h4 class="font-semibold mb-2">المحاضرات الفيديو</h4>
+            <ul class="list-disc list-inside space-y-1 text-gray-700">
+              <li><a href="#student-course-content" class="text-[var(--lime-green)] hover:underline">مقدمة في البرمجة</a></li>
+              <li><a href="#student-course-content" class="text-[var(--lime-green)] hover:underline">المتغيرات وأنواع البيانات</a></li>
+              <li><a href="#student-course-content" class="text-[var(--lime-green)] hover:underline">الشروط والحلقات</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-2">ملفات PDF</h4>
+            <ul class="list-disc list-inside space-y-1 text-gray-700">
+              <li><a href="https://placehold.co/600x800/png?text=Programming+Basics" target="_blank" class="text-[var(--lime-green)] hover:underline" download>أساسيات البرمجة</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-2">روابط خارجية</h4>
+            <ul class="list-disc list-inside space-y-1 text-gray-700">
+              <li><a href="https://www.w3schools.com/js/" target="_blank" class="text-[var(--lime-green)] hover:underline">W3Schools جافاسكريبت</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-4 flex space-x-4 rtl:space-x-reverse">
+          <a href="#student-forums" class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-4 py-2 rounded">المنتديات</a>
+          <a href="#student-assignments" class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-4 py-2 rounded">الواجبات والاختبارات</a>
+        </div>
+      </li>
+
+      <li class="border border-gray-300 rounded-lg p-6 shadow-sm">
+        <h3 class="text-xl font-bold mb-3" style="color: var(--dark-green);">تصميم واجهات المستخدم</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div>
+            <h4 class="font-semibold mb-2">المحاضرات الفيديو</h4>
+            <ul class="list-disc list-inside space-y-1 text-gray-700">
+              <li><a href="#student-course-content" class="text-[var(--lime-green)] hover:underline">مبادئ التصميم</a></li>
+              <li><a href="#student-course-content" class="text-[var(--lime-green)] hover:underline">تصميم متجاوب</a></li>
+              <li><a href="#student-course-content" class="text-[var(--lime-green)] hover:underline">أدوات التصميم</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-2">ملفات PDF</h4>
+            <ul class="list-disc list-inside space-y-1 text-gray-700">
+              <li><a href="https://placehold.co/600x800/png?text=UI+Design+Principles" target="_blank" class="text-[var(--lime-green)] hover:underline" download>مبادئ تصميم الواجهات</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-2">روابط خارجية</h4>
+            <ul class="list-disc list-inside space-y-1 text-gray-700">
+              <li><a href="https://www.adobe.com/creativecloud.html" target="_blank" class="text-[var(--lime-green)] hover:underline">Adobe Creative Cloud</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-4 flex space-x-4 rtl:space-x-reverse">
+          <a href="#student-forums" class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-4 py-2 rounded">المنتديات</a>
+          <a href="#student-assignments" class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-4 py-2 rounded">الواجبات والاختبارات</a>
+        </div>
+      </li>
+    </ul>
+  </main>
+</section>
+
+<!-- ============================
+  Student Course Content Page
+============================ -->
+<section id="student-course-content" class="hidden min-h-screen bg-white">
+  <header class="bg-[var(--dark-green)] text-white p-4 flex justify-between items-center">
+    <h2 class="text-xl font-bold">محتوى الدورة</h2>
+    <nav class="space-x-4 rtl:space-x-reverse flex items-center">
+      <a href="#student-dashboard" class="hover:underline">الرئيسية</a>
+      <a href="#student-courses" class="hover:underline">الدورات</a>
+      <a href="#student-assignments" class="hover:underline">الواجبات والاختبارات</a>
+      <a href="#student-grades" class="hover:underline">النتائج</a>
+      <a href="#student-forums" class="hover:underline">المنتديات</a>
+      <a href="#student-profile" class="hover:underline">الملف الشخصي</a>
+      <button id="logout-student-3" class="ml-4 rtl:mr-4 bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">تسجيل خروج</button>
+    </nav>
+  </header>
+  <main class="p-6 max-w-5xl mx-auto space-y-8">
+    <h3 class="text-2xl font-bold mb-6" style="color: var(--dark-green);">دورة تطوير الويب - المحتوى مقسم لوحدات</h3>
+    <div class="space-y-6">
+      <!-- Week 1 -->
+      <section class="border border-gray-300 rounded-lg p-4 shadow-sm">
+        <h4 class="font-bold text-lg mb-3">الأسبوع 1: مقدمة HTML و CSS</h4>
+        <ul class="space-y-3">
+          <li class="flex justify-between items-center border-b border-gray-200 pb-2">
+            <div>
+              <i class="fas fa-video text-[var(--lime-green)] ml-2 rtl:mr-2"></i>
+              <span>محاضرة فيديو: مقدمة في HTML</span>
+            </div>
+            <div class="flex space-x-3 rtl:space-x-reverse">
+              <button class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">مشاهدة</button>
+              <button class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">تحميل</button>
+            </div>
+          </li>
+          <li class="flex justify-between items-center border-b border-gray-200 pb-2">
+            <div>
+              <i class="fas fa-file-pdf text-[var(--lime-green)] ml-2 rtl:mr-2"></i>
+              <span>ملف PDF: دليل HTML</span>
+            </div>
+            <div class="flex space-x-3 rtl:space-x-reverse">
+              <button class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">تحميل</button>
+            </div>
+          </li>
+          <li class="flex justify-between items-center">
+            <div>
+              <i class="fas fa-external-link-alt text-[var(--lime-green)] ml-2 rtl:mr-2"></i>
+              <span>رابط خارجي: MDN HTML</span>
+            </div>
+            <div>
+              <a href="https://developer.mozilla.org/ar/docs/Web/HTML" target="_blank" class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">زيارة</a>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Week 2 -->
+      <section class="border border-gray-300 rounded-lg p-4 shadow-sm">
+        <h4 class="font-bold text-lg mb-3">الأسبوع 2: CSS للمبتدئين</h4>
+        <ul class="space-y-3">
+          <li class="flex justify-between items-center border-b border-gray-200 pb-2">
+            <div>
+              <i class="fas fa-video text-[var(--lime-green)] ml-2 rtl:mr-2"></i>
+              <span>محاضرة فيديو: أساسيات CSS</span>
+            </div>
+            <div class="flex space-x-3 rtl:space-x-reverse">
+              <button class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">مشاهدة</button>
+              <button class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">تحميل</button>
+            </div>
+          </li>
+          <li class="flex justify-between items-center border-b border-gray-200 pb-2">
+            <div>
+              <i class="fas fa-file-pdf text-[var(--lime-green)] ml-2 rtl:mr-2"></i>
+              <span>ملف PDF: دليل CSS</span>
+            </div>
+            <div class="flex space-x-3 rtl:space-x-reverse">
+              <button class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">تحميل</button>
+            </div>
+          </li>
+          <li class="flex justify-between items-center">
+            <div>
+              <i class="fas fa-external-link-alt text-[var(--lime-green)] ml-2 rtl:mr-2"></i>
+              <span>رابط خارجي: MDN CSS</span>
+            </div>
+            <div>
+              <a href="https://developer.mozilla.org/ar/docs/Web/CSS" target="_blank" class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">زيارة</a>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Week 3 -->
+      <section class="border border-gray-300 rounded-lg p-4 shadow-sm">
+        <h4 class="font-bold text-lg mb-3">الأسبوع 3: جافاسكريبت الأساسي</h4>
+        <ul class="space-y-3">
+          <li class="flex justify-between items-center border-b border-gray-200 pb-2">
+            <div>
+              <i class="fas fa-video text-[var(--lime-green)] ml-2 rtl:mr-2"></i>
+              <span>محاضرة فيديو: مقدمة جافاسكريبت</span>
+            </div>
+            <div class="flex space-x-3 rtl:space-x-reverse">
+              <button class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">مشاهدة</button>
+              <button class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">تحميل</button>
+            </div>
+          </li>
+          <li class="flex justify-between items-center border-b border-gray-200 pb-2">
+            <div>
+              <i class="fas fa-file-pdf text-[var(--lime-green)] ml-2 rtl:mr-2"></i>
+              <span>ملف PDF: دليل جافاسكريبت</span>
+            </div>
+            <div class="flex space-x-3 rtl:space-x-reverse">
+              <button class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">تحميل</button>
+            </div>
+          </li>
+          <li class="flex justify-between items-center">
+            <div>
+              <i class="fas fa-external-link-alt text-[var(--lime-green)] ml-2 rtl:mr-2"></i>
+              <span>رابط خارجي: W3Schools جافاسكريبت</span>
+            </div>
+            <div>
+              <a href="https://www.w3schools.com/js/" target="_blank" class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">زيارة</a>
+            </div>
+          </li>
+        </ul>
+      </section>
     </div>
+  </main>
+</section>
 
-    <button type="submit">دخول</button>
-  </form>
+<!-- ============================
+  Student Assignments & Quizzes Page
+============================ -->
+<section id="student-assignments" class="hidden min-h-screen bg-white">
+  <header class="bg-[var(--dark-green)] text-white p-4 flex justify-between items-center">
+    <h2 class="text-xl font-bold">الواجبات والاختبارات</h2>
+    <nav class="space-x-4 rtl:space-x-reverse flex items-center">
+      <a href="#student-dashboard" class="hover:underline">الرئيسية</a>
+      <a href="#student-courses" class="hover:underline">الدورات</a>
+      <a href="#student-assignments" class="hover:underline">الواجبات والاختبارات</a>
+      <a href="#student-grades" class="hover:underline">النتائج</a>
+      <a href="#student-forums" class="hover:underline">المنتديات</a>
+      <a href="#student-profile" class="hover:underline">الملف الشخصي</a>
+      <button id="logout-student-4" class="ml-4 rtl:mr-4 bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">تسجيل خروج</button>
+    </nav>
+  </header>
+  <main class="p-6 max-w-4xl mx-auto space-y-8">
+    <ul class="space-y-6">
+      <li class="border border-gray-300 rounded-lg p-6 shadow-sm">
+        <h3 class="text-xl font-bold mb-3" style="color: var(--dark-green);">واجب: صفحة HTML أساسية</h3>
+        <p class="mb-2">تاريخ التسليم: 10 مايو 2024</p>
+        <form class="space-y-4" action="#" method="POST" enctype="multipart/form-data">
+          <label class="block font-semibold" for="upload-assignment-1">رفع الواجب (ملف PDF أو DOCX)</label>
+          <input id="upload-assignment-1" name="upload-assignment-1" type="file" accept=".pdf,.doc,.docx" class="border border-gray-300 rounded px-3 py-2 w-full" required />
+          <button type="submit" class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-4 py-2 rounded">رفع الواجب</button>
+        </form>
+      </li>
+
+      <li class="border border-gray-300 rounded-lg p-6 shadow-sm">
+        <h3 class="text-xl font-bold mb-3" style="color: var(--dark-green);">اختبار: أساسيات CSS</h3>
+        <p class="mb-2">تاريخ التسليم: 15 مايو 2024</p>
+        <form class="space-y-6" action="#" method="POST">
+          <!-- Multiple Choice -->
+          <fieldset>
+            <legend class="font-semibold mb-2">1. ما هو العنصر المستخدم لتحديد لون الخلفية في CSS؟</legend>
+            <label class="block mb-1"><input type="radio" name="q1" value="color" required /> color</label>
+            <label class="block mb-1"><input type="radio" name="q1" value="background-color" /> background-color</label>
+            <label class="block mb-1"><input type="radio" name="q1" value="font-color" /> font-color</label>
+          </fieldset>
+          <!-- True/False -->
+          <fieldset>
+            <legend class="font-semibold mb-2">2. يمكن استخدام الوسم &lt;div&gt; لتقسيم الصفحة إلى أقسام. (صح أم خطأ؟)</legend>
+            <label class="block mb-1"><input type="radio" name="q2" value="true" required /> صح</label>
+            <label class="block mb-1"><input type="radio" name="q2" value="false" /> خطأ</label>
+          </fieldset>
+          <!-- Short Answer -->
+          <fieldset>
+            <legend class="font-semibold mb-2">3. اذكر خاصية CSS تستخدم لتغيير حجم الخط.</legend>
+            <input type="text" name="q3" required class="border border-gray-300 rounded px-3 py-2 w-full" />
+          </fieldset>
+          <button type="submit" class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-4 py-2 rounded">إرسال الاختبار</button>
+        </form>
+      </li>
+    </ul>
+  </main>
+</section>
+
+<!-- ============================
+  Student Grades & Reports Page
+============================ -->
+<section id="student-grades" class="hidden min-h-screen bg-white">
+  <header class="bg-[var(--dark-green)] text-white p-4 flex justify-between items-center">
+    <h2 class="text-xl font-bold">النتائج والتقارير</h2>
+    <nav class="space-x-4 rtl:space-x-reverse flex items-center">
+      <a href="#student-dashboard" class="hover:underline">الرئيسية</a>
+      <a href="#student-courses" class="hover:underline">الدورات</a>
+      <a href="#student-assignments" class="hover:underline">الواجبات والاختبارات</a>
+      <a href="#student-grades" class="hover:underline">النتائج</a>
+      <a href="#student-forums" class="hover:underline">المنتديات</a>
+      <a href="#student-profile" class="hover:underline">الملف الشخصي</a>
+      <button id="logout-student-5" class="ml-4 rtl:mr-4 bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">تسجيل خروج</button>
+    </nav>
+  </header>
+  <main class="p-6 max-w-4xl mx-auto space-y-8">
+    <h3 class="text-2xl font-bold mb-6" style="color: var(--dark-green);">درجات الواجبات والاختبارات</h3>
+    <table class="w-full border border-gray-300 rounded-lg text-center">
+      <thead class="bg-[var(--lime-green)] text-white">
+        <tr>
+          <th class="p-3 border border-white">اسم المهمة</th>
+          <th class="p-3 border border-white">نوع المهمة</th>
+          <th class="p-3 border border-white">التاريخ</th>
+          <th class="p-3 border border-white">الدرجة</th>
+          <th class="p-3 border border-white">الحالة</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border border-gray-300">
+          <td class="p-3 border border-gray-300">واجب: صفحة HTML أساسية</td>
+          <td class="p-3 border border-gray-300">واجب</td>
+          <td class="p-3 border border-gray-300">10 مايو 2025</td>
+          <td class="p-3 border border-gray-300">95%</td>
+          <td class="p-3 border border-gray-300 text-green-700 font-semibold">مكتمل</td>
+        </tr>
+        <tr class="border border-gray-300 bg-gray-50">
+          <td class="p-3 border border-gray-300">اختبار: أساسيات CSS</td>
+          <td class="p-3 border border-gray-300">اختبار</td>
+          <td class="p-3 border border-gray-300">15 مايو 2025</td>
+          <td class="p-3 border border-gray-300">لم يتم التقييم</td>
+          <td class="p-3 border border-gray-300 text-yellow-600 font-semibold">قيد الانتظار</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <section>
+      <h4 class="text-xl font-bold mb-3" style="color: var(--dark-green);">ملخص الأداء الدراسي والتقدم في الدورة</h4>
+      <div class="border border-gray-300 rounded-lg p-4 shadow-sm">
+        <p>لقد أكملت 75% من دورة تطوير الويب بنجاح مع درجات ممتازة في الواجبات والاختبارات.</p>
+        <p>ينصح بمراجعة المحاضرات القادمة والتركيز على الاختبارات القادمة.</p>
+      </div>
+    </section>
+  </main>
+</section>
+
+<!-- ============================
+  Student Discussion Forums Page
+============================ -->
+<section id="student-forums" class="hidden min-h-screen bg-white">
+  <header class="bg-[var(--dark-green)] text-white p-4 flex justify-between items-center">
+    <h2 class="text-xl font-bold">المنتديات والمناقشات</h2>
+    <nav class="space-x-4 rtl:space-x-reverse flex items-center">
+      <a href="#student-dashboard" class="hover:underline">الرئيسية</a>
+      <a href="#student-courses" class="hover:underline">الدورات</a>
+      <a href="#student-assignments" class="hover:underline">الواجبات والاختبارات</a>
+      <a href="#student-grades" class="hover:underline">النتائج</a>
+      <a href="#student-forums" class="hover:underline">المنتديات</a>
+      <a href="#student-profile" class="hover:underline">الملف الشخصي</a>
+      <button id="logout-student-6" class="ml-4 rtl:mr-4 bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">تسجيل خروج</button>
+    </nav>
+  </header>
+  <main class="p-6 max-w-5xl mx-auto space-y-8">
+    <section>
+      <h3 class="text-2xl font-bold mb-4" style="color: var(--dark-green);">المنتديات الخاصة بالدورات</h3>
+      <ul class="space-y-6 max-h-[400px] overflow-y-auto scrollbar-thin border border-gray-300 rounded-lg p-4">
+        <li class="border-b border-gray-300 pb-4">
+          <h4 class="font-semibold text-lg mb-1">منتدى دورة تطوير الويب</h4>
+          <p class="text-gray-700 mb-2">هل يمكن لأحد شرح الفرق بين &lt;div&gt; و &lt;section&gt;؟</p>
+          <div class="space-x-4 rtl:space-x-reverse flex items-center text-sm text-gray-600">
+            <span><i class="fas fa-user-circle ml-1 rtl:mr-1"></i> الطالب أحمد</span>
+            <span><i class="fas fa-clock ml-1 rtl:mr-1"></i> منذ 3 ساعات</span>
+            <button class="text-[var(--lime-green)] hover:underline">رد</button>
+          </div>
+        </li>
+        <li class="border-b border-gray-300 pb-4">
+          <h4 class="font-semibold text-lg mb-1">منتدى دورة أساسيات البرمجة</h4>
+          <p class="text-gray-700 mb-2">ما هي أفضل طريقة لفهم الحلقات في جافاسكريبت؟</p>
+          <div class="space-x-4 rtl:space-x-reverse flex items-center text-sm text-gray-600">
+            <span><i class="fas fa-user-circle ml-1 rtl:mr-1"></i> الطالبة سارة</span>
+            <span><i class="fas fa-clock ml-1 rtl:mr-1"></i> منذ يوم</span>
+            <button class="text-[var(--lime-green)] hover:underline">رد</button>
+          </div>
+        </li>
+        <li class="border-b border-gray-300 pb-4">
+          <h4 class="font-semibold text-lg mb-1">منتدى دورة تصميم واجهات المستخدم</h4>
+          <p class="text-gray-700 mb-2">هل يمكن مشاركة مصادر لتعلم تصميم متجاوب؟</p>
+          <div class="space-x-4 rtl:space-x-reverse flex items-center text-sm text-gray-600">
+            <span><i class="fas fa-user-circle ml-1 rtl:mr-1"></i> الطالب خالد</span>
+            <span><i class="fas fa-clock ml-1 rtl:mr-1"></i> منذ ساعتين</span>
+            <button class="text-[var(--lime-green)] hover:underline">رد</button>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h4 class="text-xl font-bold mb-3" style="color: var(--dark-green);">إنشاء موضوع جديد</h4>
+      <form action="#" method="POST" class="space-y-4">
+        <input type="text" name="topic-title" placeholder="عنوان الموضوع" required class="w-full border border-gray-300 rounded px-3 py-2" />
+        <textarea name="topic-content" rows="5" placeholder="محتوى الموضوع" required class="w-full border border-gray-300 rounded px-3 py-2"></textarea>
+        <button type="submit" class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-4 py-2 rounded">نشر الموضوع</button>
+      </form>
+    </section>
+  </main>
+</section>
+
+<!-- ============================
+  Student Profile Page
+============================ -->
+<section id="student-profile" class="hidden min-h-screen bg-white">
+  <header class="bg-[var(--dark-green)] text-white p-4 flex justify-between items-center">
+    <h2 class="text-xl font-bold">الملف الشخصي</h2>
+    <nav class="space-x-4 rtl:space-x-reverse flex items-center">
+      <a href="#student-dashboard" class="hover:underline">الرئيسية</a>
+      <a href="#student-courses" class="hover:underline">الدورات</a>
+      <a href="#student-assignments" class="hover:underline">الواجبات والاختبارات</a>
+      <a href="#student-grades" class="hover:underline">النتائج</a>
+      <a href="#student-forums" class="hover:underline">المنتديات</a>
+      <a href="#student-profile" class="hover:underline">الملف الشخصي</a>
+      <button id="logout-student-7" class="ml-4 rtl:mr-4 bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">تسجيل خروج</button>
+    </nav>
+  </header>
+  <main class="p-6 max-w-3xl mx-auto space-y-8">
+    <section class="flex flex-col items-center space-y-4">
+      <img src="https://placehold.co/150x150/png?text=صورة+شخصية+طالب" alt="صورة شخصية لطالب شاب مبتسم يرتدي قميص أزرق في خلفية بيضاء" class="rounded-full border-4 border-[var(--lime-green)]" />
+      <h3 class="text-2xl font-bold" style="color: var(--dark-green);">أحمد محمد</h3>
+      <p class="text-gray-700">البريد الإلكتروني: ahmed@example.com</p>
+    </section>
+
+    <section>
+      <h4 class="text-xl font-bold mb-4" style="color: var(--dark-green);">تعديل المعلومات</h4>
+      <form action="#" method="POST" class="space-y-6 max-w-md mx-auto">
+        <div>
+          <label for="name" class="block mb-1 font-semibold">الاسم</label>
+          <input id="name" name="name" type="text" value="صبري درهم" required class="w-full border border-gray-300 rounded px-3 py-2" />
+        </div>
+        <div>
+          <label for="email" class="block mb-1 font-semibold">البريد الإلكتروني</label>
+          <input id="email" name="email" type="email" value="sharaf.sabry18@gmail.com" required class="w-full border border-gray-300 rounded px-3 py-2" />
+        </div>
+        <div>
+          <label for="phone" class="block mb-1 font-semibold">رقم الهاتف</label>
+          <input id="phone" name="phone" type="tel" placeholder="مثال: 00967780840146" class="w-full border border-gray-300 rounded px-3 py-2" />
+        </div>
+        <div>
+          <label for="password" class="block mb-1 font-semibold">تغيير كلمة المرور</label>
+          <input id="password" name="password" type="password" placeholder="كلمة المرور الجديدة" class="w-full border border-gray-300 rounded px-3 py-2" />
+        </div>
+        <button type="submit" class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-6 py-2 rounded">حفظ التغييرات</button>
+      </form>
+    </section>
+  </main>
+</section>
+
+<!-- ============================
+  Teacher Dashboard
+============================ -->
+<section id="teacher-dashboard" class="hidden min-h-screen bg-white">
+  <header class="bg-[var(--dark-green)] text-white p-4 flex justify-between items-center">
+    <h2 class="text-xl font-bold">لوحة تحكم المدرس</h2>
+    <nav class="space-x-4 rtl:space-x-reverse flex items-center">
+      <a href="#teacher-dashboard" class="hover:underline">الرئيسية</a>
+      <a href="#teacher-course-management" class="hover:underline">إدارة الدورات</a>
+      <a href="#teacher-student-management" class="hover:underline">إدارة الطلاب</a>
+      <a href="#teacher-quiz-builder" class="hover:underline">إنشاء الاختبارات والواجبات</a>
+      <a href="#teacher-grading" class="hover:underline">التصحيح والتقييم</a>
+      <a href="#teacher-forums-management" class="hover:underline">إدارة المنتديات</a>
+      <a href="#teacher-reports" class="hover:underline">التقارير</a>
+      <a href="#teacher-profile" class="hover:underline">الملف الشخصي</a>
+      <button id="logout-teacher" class="ml-4 rtl:mr-4 bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">تسجيل خروج</button>
+    </nav>
+  </header>
+  <main class="p-6 max-w-7xl mx-auto space-y-8">
+    <!-- Summary of courses taught -->
+    <section>
+      <h3 class="text-2xl font-bold mb-4" style="color: var(--dark-green);">ملخص الدورات التي تدرّسها</h3>
+      <ul class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <li class="border border-gray-300 rounded-lg p-4 shadow-sm">
+          <h4 class="font-semibold mb-2">دورة تطوير الويب</h4>
+          <p>عدد الطلاب: 45</p>
+          <p>التقدم العام: 70%</p>
+        </li>
+        <li class="border border-gray-300 rounded-lg p-4 shadow-sm">
+          <h4 class="font-semibold mb-2">أساسيات البرمجة</h4>
+          <p>عدد الطلاب: 38</p>
+          <p>التقدم العام: 55%</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Notifications -->
+    <section>
+      <h3 class="text-2xl font-bold mb-4" style="color: var(--dark-green);">الإشعارات بالطلبات الجديدة</h3>
+      <ul class="space-y-3">
+        <li class="border border-gray-300 rounded p-3 flex items-center space-x-3 rtl:space-x-reverse">
+          <i class="fas fa-file-upload text-[var(--lime-green)] text-xl"></i>
+          <p>تم تسليم واجب جديد من الطالب أحمد في دورة تطوير الويب</p>
+        </li>
+        <li class="border border-gray-300 rounded p-3 flex items-center space-x-3 rtl:space-x-reverse">
+          <i class="fas fa-question-circle text-[var(--lime-green)] text-xl"></i>
+          <p>طلب دعم من الطالبة سارة في دورة أساسيات البرمجة</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Calendar -->
+    <section>
+      <h3 class="text-2xl font-bold mb-4" style="color: var(--dark-green);">تقويم المحاضرات والاختبارات القادمة</h3>
+      <div class="overflow-x-auto border border-gray-300 rounded-lg p-4">
+        <table class="w-full text-center table-fixed">
+          <thead class="bg-[var(--lime-green)] text-white">
+            <tr>
+              <th class="p-2">الأحد</th>
+              <th class="p-2">الاثنين</th>
+              <th class="p-2">الثلاثاء</th>
+              <th class="p-2">الأربعاء</th>
+              <th class="p-2">الخميس</th>
+              <th class="p-2">الجمعة</th>
+              <th class="p-2">السبت</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-2 text-gray-400">28</td>
+              <td class="p-2 text-gray-400">29</td>
+              <td class="p-2 text-gray-400">30</td>
+              <td class="p-2">1</td>
+              <td class="p-2">2</td>
+              <td class="p-2">3</td>
+              <td class="p-2">4</td>
+            </tr>
+            <tr>
+              <td class="p-2">5</td>
+              <td class="p-2">6</td>
+              <td class="p-2 bg-[var(--light-lime-green)] rounded">7<br /><span class="text-xs">محاضرة</span></td>
+              <td class="p-2">8</td>
+              <td class="p-2 bg-[var(--light-lime-green)] rounded">9<br /><span class="text-xs">اختبار</span></td>
+              <td class="p-2">10</td>
+              <td class="p-2">11</td>
+            </tr>
+            <tr>
+              <td class="p-2">12</td>
+              <td class="p-2">13</td>
+              <td class="p-2">14</td>
+              <td class="p-2">15</td>
+              <td class="p-2">16</td>
+              <td class="p-2">17</td>
+              <td class="p-2">18</td>
+            </tr>
+            <tr>
+              <td class="p-2">19</td>
+              <td class="p-2">20</td>
+              <td class="p-2">21</td>
+              <td class="p-2">22</td>
+              <td class="p-2">23</td>
+              <td class="p-2">24</td>
+              <td class="p-2">25</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</section>
+
+<!-- ============================
+  Teacher Course Management Page
+============================ -->
+<section id="teacher-course-management" class="hidden min-h-screen bg-white">
+  <header class="bg-[var(--dark-green)] text-white p-4 flex justify-between items-center">
+    <h2 class="text-xl font-bold">إدارة الدورات</h2>
+    <nav class="space-x-4 rtl:space-x-reverse flex items-center">
+      <a href="#teacher-dashboard" class="hover:underline">الرئيسية</a>
+      <a href="#teacher-course-management" class="hover:underline">إدارة الدورات</a>
+      <a href="#teacher-student-management" class="hover:underline">إدارة الطلاب</a>
+      <a href="#teacher-quiz-builder" class="hover:underline">إنشاء الاختبارات والواجبات</a>
+      <a href="#teacher-grading" class="hover:underline">التصحيح والتقييم</a>
+      <a href="#teacher-forums-management" class="hover:underline">إدارة المنتديات</a>
+      <a href="#teacher-reports" class="hover:underline">التقارير</a>
+      <a href="#teacher-profile" class="hover:underline">الملف الشخصي</a>
+      <button id="logout-teacher-2" class="ml-4 rtl:mr-4 bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">تسجيل خروج</button>
+    </nav>
+  </header>
+  <main class="p-6 max-w-5xl mx-auto space-y-8">
+    <section>
+      <h3 class="text-2xl font-bold mb-4" style="color: var(--dark-green);">إنشاء دورة جديدة</h3>
+      <form action="#" method="POST" class="space-y-6 border border-gray-300 rounded-lg p-6 shadow-sm">
+        <div>
+          <label for="course-title" class="block mb-1 font-semibold">عنوان الدورة</label>
+          <input id="course-title" name="course-title" type="text" required class="w-full border border-gray-300 rounded px-3 py-2" />
+        </div>
+        <div>
+          <label for="course-description" class="block mb-1 font-semibold">وصف الدورة</label>
+          <textarea id="course-description" name="course-description" rows="4" required class="w-full border border-gray-300 rounded px-3 py-2"></textarea>
+        </div>
+        <button type="submit" class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-6 py-2 rounded">إنشاء الدورة</button>
+      </form>
+    </section>
+
+    <section>
+      <h3 class="text-2xl font-bold mb-4" style="color: var(--dark-green);">الدورات الحالية</h3>
+      <ul class="space-y-6">
+        <li class="border border-gray-300 rounded-lg p-4 shadow-sm flex flex-col md:flex-row md:justify-between md:items-center">
+          <div>
+            <h4 class="font-semibold text-lg">دورة تطوير الويب</h4>
+            <p class="text-gray-700">وصف مختصر للدورة...</p>
+          </div>
+          <div class="space-x-3 rtl:space-x-reverse mt-4 md:mt-0">
+            <button class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-4 py-2 rounded">تعديل</button>
+            <button class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">حذف</button>
+            <button class="bg-[var(--dark-green)] hover:bg-[var(--lime-green)] text-white px-4 py-2 rounded">إضافة محتوى</button>
+          </div>
+        </li>
+        <li class="border border-gray-300 rounded-lg p-4 shadow-sm flex flex-col md:flex-row md:justify-between md:items-center">
+          <div>
+            <h4 class="font-semibold text-lg">أساسيات البرمجة</h4>
+            <p class="text-gray-700">وصف مختصر للدورة...</p>
+          </div>
+          <div class="space-x-3 rtl:space-x-reverse mt-4 md:mt-0">
+            <button class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-4 py-2 rounded">تعديل</button>
+            <button class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">حذف</button>
+            <button class="bg-[var(--dark-green)] hover:bg-[var(--lime-green)] text-white px-4 py-2 rounded">إضافة محتوى</button>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </main>
+</section>
+
+<!-- ============================
+  Teacher Student Management Page
+============================ -->
+<section id="teacher-student-management" class="hidden min-h-screen bg-white">
+  <header class="bg-[var(--dark-green)] text-white p-4 flex justify-between items-center">
+    <h2 class="text-xl font-bold">إدارة الطلاب</h2>
+    <nav class="space-x-4 rtl:space-x-reverse flex items-center">
+      <a href="#teacher-dashboard" class="hover:underline">الرئيسية</a>
+      <a href="#teacher-course-management" class="hover:underline">إدارة الدورات</a>
+      <a href="#teacher-student-management" class="hover:underline">إدارة الطلاب</a>
+      <a href="#teacher-quiz-builder" class="hover:underline">إنشاء الاختبارات والواجبات</a>
+      <a href="#teacher-grading" class="hover:underline">التصحيح والتقييم</a>
+      <a href="#teacher-forums-management" class="hover:underline">إدارة المنتديات</a>
+      <a href="#teacher-reports" class="hover:underline">التقارير</a>
+      <a href="#teacher-profile" class="hover:underline">الملف الشخصي</a>
+      <button id="logout-teacher-3" class="ml-4 rtl:mr-4 bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">تسجيل خروج</button>
+    </nav>
+  </header>
+  <main class="p-6 max-w-5xl mx-auto space-y-8">
+    <h3 class="text-2xl font-bold mb-4" style="color: var(--dark-green);">الطلاب المسجلون في دورة تطوير الويب</h3>
+    <table class="w-full border border-gray-300 rounded-lg text-center">
+      <thead class="bg-[var(--lime-green)] text-white">
+        <tr>
+          <th class="p-3 border border-white">اسم الطالب</th>
+          <th class="p-3 border border-white">البريد الإلكتروني</th>
+          <th class="p-3 border border-white">التقدم</th>
+          <th class="p-3 border border-white">الحضور</th>
+          <th class="p-3 border border-white">الدرجة</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border border-gray-300">
+          <td class="p-3 border border-gray-300">أحمد محمد</td>
+          <td class="p-3 border border-gray-300">ahmed@example.com</td>
+          <td class="p-3 border border-gray-300">75%</td>
+          <td class="p-3 border border-gray-300">90%</td>
+          <td class="p-3 border border-gray-300">95%</td>
+        </tr>
+        <tr class="border border-gray-300 bg-gray-50">
+          <td class="p-3 border border-gray-300">سارة محمود</td>
+          <td class="p-3 border border-gray-300">sara@example.com</td>
+          <td class="p-3 border border-gray-300">40%</td>
+          <td class="p-3 border border-gray-300">80%</td>
+          <td class="p-3 border border-gray-300">85%</td>
+        </tr>
+        <tr class="border border-gray-300">
+          <td class="p-3 border border-gray-300">خالد حسن</td>
+          <td class="p-3 border border-gray-300">khaled@example.com</td>
+          <td class="p-3 border border-gray-300">90%</td>
+          <td class="p-3 border border-gray-300">95%</td>
+          <td class="p-3 border border-gray-300">98%</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+</section>
+
+<!-- ============================
+  Teacher Quiz & Assignment Builder Page
+============================ -->
+<section id="teacher-quiz-builder" class="hidden min-h-screen bg-white">
+  <header class="bg-[var(--dark-green)] text-white p-4 flex justify-between items-center">
+    <h2 class="text-xl font-bold">إنشاء وتعديل الاختبارات والواجبات</h2>
+    <nav class="space-x-4 rtl:space-x-reverse flex items-center">
+      <a href="#teacher-dashboard" class="hover:underline">الرئيسية</a>
+      <a href="#teacher-course-management" class="hover:underline">إدارة الدورات</a>
+      <a href="#teacher-student-management" class="hover:underline">إدارة الطلاب</a>
+      <a href="#teacher-quiz-builder" class="hover:underline">إنشاء الاختبارات والواجبات</a>
+      <a href="#teacher-grading" class="hover:underline">التصحيح والتقييم</a>
+      <a href="#teacher-forums-management" class="hover:underline">إدارة المنتديات</a>
+      <a href="#teacher-reports" class="hover:underline">التقارير</a>
+      <a href="#teacher-profile" class="hover:underline">الملف الشخصي</a>
+      <button id="logout-teacher-4" class="ml-4 rtl:mr-4 bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">تسجيل خروج</button>
+    </nav>
+  </header>
+  <main class="p-6 max-w-4xl mx-auto space-y-8">
+    <form action="#" method="POST" class="space-y-6 border border-gray-300 rounded-lg p-6 shadow-sm">
+      <div>
+        <label for="quiz-title" class="block mb-1 font-semibold">عنوان الاختبار / الواجب</label>
+        <input id="quiz-title" name="quiz-title" type="text" required class="w-full border border-gray-300 rounded px-3 py-2" />
+      </div>
+      <div>
+        <label for="due-date" class="block mb-1 font-semibold">تاريخ التسليم</label>
+        <input id="due-date" name="due-date" type="date" required class="w-full border border-gray-300 rounded px-3 py-2" />
+      </div>
+      <div>
+        <label for="attempts" class="block mb-1 font-semibold">عدد المحاولات</label>
+        <input id="attempts" name="attempts" type="number" min="1" max="10" value="1" required class="w-full border border-gray-300 rounded px-3 py-2" />
+      </div>
+      <div>
+        <label for="time-limit" class="block mb-1 font-semibold">زمن الاختبار (بالدقائق)</label>
+        <input id="time-limit" name="time-limit" type="number" min="1" max="180" value="30" required class="w-full border border-gray-300 rounded px-3 py-2" />
+      </div>
+
+      <section>
+        <h4 class="text-lg font-bold mb-3" style="color: var(--dark-green);">تصميم الأسئلة</h4>
+        <div id="questions-container" class="space-y-6">
+          <!-- Question 1 -->
+          <div class="border border-gray-300 rounded p-4">
+            <label class="block font-semibold mb-2">السؤال 1</label>
+            <input type="text" name="question-1-text" placeholder="نص السؤال" required class="w-full border border-gray-300 rounded px-3 py-2 mb-3" />
+            <select name="question-1-type" required class="w-full border border-gray-300 rounded px-3 py-2 mb-3">
+              <option value="" disabled selected>اختر نوع السؤال</option>
+              <option value="multiple-choice">اختيار من متعدد</option>
+              <option value="true-false">صح وخطأ</option>
+              <option value="short-answer">إجابة قصيرة</option>
+            </select>
+            <div class="space-y-2" id="question-1-options">
+              <input type="text" name="question-1-option-1" placeholder="الخيار 1" class="w-full border border-gray-300 rounded px-3 py-2" />
+              <input type="text" name="question-1-option-2" placeholder="الخيار 2" class="w-full border border-gray-300 rounded px-3 py-2" />
+            </div>
+          </div>
+          <!-- Question 2 -->
+          <div class="border border-gray-300 rounded p-4">
+            <label class="block font-semibold mb-2">السؤال 2</label>
+            <input type="text" name="question-2-text" placeholder="نص السؤال" required class="w-full border border-gray-300 rounded px-3 py-2 mb-3" />
+            <select name="question-2-type" required class="w-full border border-gray-300 rounded px-3 py-2 mb-3">
+              <option value="" disabled selected>اختر نوع السؤال</option>
+              <option value="multiple-choice">اختيار من متعدد</option>
+              <option value="true-false">صح وخطأ</option>
+              <option value="short-answer">إجابة قصيرة</option>
+            </select>
+            <div class="space-y-2" id="question-2-options">
+              <input type="text" name="question-2-option-1" placeholder="الخيار 1" class="w-full border border-gray-300 rounded px-3 py-2" />
+              <input type="text" name="question-2-option-2" placeholder="الخيار 2" class="w-full border border-gray-300 rounded px-3 py-2" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <button type="submit" class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-6 py-2 rounded">حفظ الاختبار / الواجب</button>
+    </form>
+  </main>
+</section>
+
+<!-- ============================
+  Teacher Grading & Feedback Page
+============================ -->
+<section id="teacher-grading" class="hidden min-h-screen bg-white">
+  <header class="bg-[var(--dark-green)] text-white p-4 flex justify-between items-center">
+    <h2 class="text-xl font-bold">تصحيح وتقييم الواجبات</h2>
+    <nav class="space-x-4 rtl:space-x-reverse flex items-center">
+      <a href="#teacher-dashboard" class="hover:underline">الرئيسية</a>
+      <a href="#teacher-course-management" class="hover:underline">إدارة الدورات</a>
+      <a href="#teacher-student-management" class="hover:underline">إدارة الطلاب</a>
+      <a href="#teacher-quiz-builder" class="hover:underline">إنشاء الاختبارات والواجبات</a>
+      <a href="#teacher-grading" class="hover:underline">التصحيح والتقييم</a>
+      <a href="#teacher-forums-management" class="hover:underline">إدارة المنتديات</a>
+      <a href="#teacher-reports" class="hover:underline">التقارير</a>
+      <a href="#teacher-profile" class="hover:underline">الملف الشخصي</a>
+      <button id="logout-teacher-5" class="ml-4 rtl:mr-4 bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">تسجيل خروج</button>
+    </nav>
+  </header>
+  <main class="p-6 max-w-4xl mx-auto space-y-8">
+    <h3 class="text-2xl font-bold mb-4" style="color: var(--dark-green);">الواجبات المقدمة من الطلاب</h3>
+    <ul class="space-y-6">
+      <li class="border border-gray-300 rounded-lg p-4 shadow-sm">
+        <h4 class="font-semibold mb-2">أحمد محمد - واجب: صفحة HTML أساسية</h4>
+        <a href="https://placehold.co/600x800/png?text=Uploaded+Assignment+Ahmed" target="_blank" class="text-[var(--lime-green)] hover:underline mb-3 inline-block">عرض الواجب المرفوع</a>
+        <form action="#" method="POST" class="space-y-4">
+          <label for="grade-1" class="block font-semibold">تقييم الدرجة (%)</label>
+          <input id="grade-1" name="grade-1" type="number" min="0" max="100" value="95" required class="w-full border border-gray-300 rounded px-3 py-2" />
+          <label for="feedback-1" class="block font-semibold">الملاحظات والتعليقات</label>
+          <textarea id="feedback-1" name="feedback-1" rows="4" class="w-full border border-gray-300 rounded px-3 py-2">عمل ممتاز، استمر على هذا الأداء.</textarea>
+          <button type="submit" class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-6 py-2 rounded">حفظ التقييم</button>
+        </form>
+      </li>
+      <li class="border border-gray-300 rounded-lg p-4 shadow-sm">
+        <h4 class="font-semibold mb-2">سارة محمود - واجب: صفحة HTML أساسية</h4>
+        <a href="https://placehold.co/600x800/png?text=Uploaded+Assignment+Sara" target="_blank" class="text-[var(--lime-green)] hover:underline mb-3 inline-block">عرض الواجب المرفوع</a>
+        <form action="#" method="POST" class="space-y-4">
+          <label for="grade-2" class="block font-semibold">تقييم الدرجة (%)</label>
+          <input id="grade-2" name="grade-2" type="number" min="0" max="100" value="88" required class="w-full border border-gray-300 rounded px-3 py-2" />
+          <label for="feedback-2" class="block font-semibold">الملاحظات والتعليقات</label>
+          <textarea id="feedback-2" name="feedback-2" rows="4" class="w-full border border-gray-300 rounded px-3 py-2">جيد، لكن يحتاج إلى تحسين في التنسيق.</textarea>
+          <button type="submit" class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-6 py-2 rounded">حفظ التقييم</button>
+        </form>
+      </li>
+    </ul>
+  </main>
+</section>
+<!-- ============================
+  Teacher Forums Management Page (continued)
+============================ -->
+<section id="teacher-forums-management" class="hidden min-h-screen bg-white">
+  <header class="bg-[var(--dark-green)] text-white p-4 flex justify-between items-center">
+    <h2 class="text-xl font-bold">إدارة المنتديات</h2>
+    <nav class="space-x-4 rtl:space-x-reverse flex items-center">
+      <a href="#teacher-dashboard" class="hover:underline">الرئيسية</a>
+      <a href="#teacher-course-management" class="hover:underline">إدارة الدورات</a>
+      <a href="#teacher-student-management" class="hover:underline">إدارة الطلاب</a>
+      <a href="#teacher-quiz-builder" class="hover:underline">إنشاء الاختبارات والواجبات</a>
+      <a href="#teacher-grading" class="hover:underline">التصحيح والتقييم</a>
+      <a href="#teacher-forums-management" class="hover:underline">إدارة المنتديات</a>
+      <a href="#teacher-reports" class="hover:underline">التقارير</a>
+      <a href="#teacher-profile" class="hover:underline">الملف الشخصي</a>
+      <button id="logout-teacher-6" class="ml-4 rtl:mr-4 bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">تسجيل خروج</button>
+    </nav>
+  </header>
+  <main class="p-6 max-w-5xl mx-auto space-y-8">
+    <section>
+      <h3 class="text-2xl font-bold mb-4" style="color: var(--dark-green);">المنتديات الحالية</h3>
+      <ul class="space-y-6 max-h-[400px] overflow-y-auto scrollbar-thin border border-gray-300 rounded-lg p-4">
+        <li class="border-b border-gray-300 pb-4 flex flex-col">
+          <div class="flex justify-between items-center mb-1">
+            <h4 class="font-semibold text-lg">منتدى دورة تطوير الويب</h4>
+            <button class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm">حذف موضوع</button>
+          </div>
+          <p class="text-gray-700 mb-2">هل يمكن لأحد شرح الفرق بين &lt;div&gt; و &lt;section&gt;؟</p>
+          <div class="space-x-4 rtl:space-x-reverse flex items-center text-sm text-gray-600">
+            <span><i class="fas fa-user-circle ml-1 rtl:mr-1"></i> الطالب أحمد</span>
+            <span><i class="fas fa-clock ml-1 rtl:mr-1"></i> منذ 3 ساعات</span>
+            <button class="text-[var(--lime-green)] hover:underline">تثبيت</button>
+            <button class="text-[var(--lime-green)] hover:underline">رد</button>
+          </div>
+        </li>
+        <li class="border-b border-gray-300 pb-4 flex flex-col">
+          <div class="flex justify-between items-center mb-1">
+            <h4 class="font-semibold text-lg">منتدى دورة أساسيات البرمجة</h4>
+            <button class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm">حذف موضوع</button>
+          </div>
+          <p class="text-gray-700 mb-2">ما هي أفضل طريقة لفهم الحلقات في جافاسكريبت؟</p>
+          <div class="space-x-4 rtl:space-x-reverse flex items-center text-sm text-gray-600">
+            <span><i class="fas fa-user-circle ml-1 rtl:mr-1"></i> الطالبة سارة</span>
+            <span><i class="fas fa-clock ml-1 rtl:mr-1"></i> منذ يوم</span>
+            <button class="text-[var(--lime-green)] hover:underline">تثبيت</button>
+            <button class="text-[var(--lime-green)] hover:underline">رد</button>
+          </div>
+        </li>
+        <li class="pb-4 flex flex-col">
+          <div class="flex justify-between items-center mb-1">
+            <h4 class="font-semibold text-lg">منتدى دورة تصميم واجهات المستخدم</h4>
+            <button class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm">حذف موضوع</button>
+          </div>
+          <p class="text-gray-700 mb-2">هل يمكن مشاركة مصادر لتعلم تصميم متجاوب؟</p>
+          <div class="space-x-4 rtl:space-x-reverse flex items-center text-sm text-gray-600">
+            <span><i class="fas fa-user-circle ml-1 rtl:mr-1"></i> الطالب خالد</span>
+            <span><i class="fas fa-clock ml-1 rtl:mr-1"></i> منذ ساعتين</span>
+            <button class="text-[var(--lime-green)] hover:underline">تثبيت</button>
+            <button class="text-[var(--lime-green)] hover:underline">رد</button>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h4 class="text-xl font-bold mb-3" style="color: var(--dark-green);">إنشاء موضوع جديد</h4>
+      <form action="#" method="POST" class="space-y-4">
+        <input type="text" name="topic-title" placeholder="عنوان الموضوع" required class="w-full border border-gray-300 rounded px-3 py-2" />
+        <textarea name="topic-content" rows="5" placeholder="محتوى الموضوع" required class="w-full border border-gray-300 rounded px-3 py-2"></textarea>
+        <button type="submit" class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-4 py-2 rounded">نشر الموضوع</button>
+      </form>
+    </section>
+  </main>
+</section>
+
+<!-- ============================
+  Teacher Reports Page
+============================ -->
+<section id="teacher-reports" class="hidden min-h-screen bg-white">
+  <header class="bg-[var(--dark-green)] text-white p-4 flex justify-between items-center">
+    <h2 class="text-xl font-bold">التقارير</h2>
+    <nav class="space-x-4 rtl:space-x-reverse flex items-center">
+      <a href="#teacher-dashboard" class="hover:underline">الرئيسية</a>
+      <a href="#teacher-course-management" class="hover:underline">إدارة الدورات</a>
+      <a href="#teacher-student-management" class="hover:underline">إدارة الطلاب</a>
+      <a href="#teacher-quiz-builder" class="hover:underline">إنشاء الاختبارات والواجبات</a>
+      <a href="#teacher-grading" class="hover:underline">التصحيح والتقييم</a>
+      <a href="#teacher-forums-management" class="hover:underline">إدارة المنتديات</a>
+      <a href="#teacher-reports" class="hover:underline">التقارير</a>
+      <a href="#teacher-profile" class="hover:underline">الملف الشخصي</a>
+      <button id="logout-teacher-7" class="ml-4 rtl:mr-4 bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">تسجيل خروج</button>
+    </nav>
+  </header>
+  <main class="p-6 max-w-5xl mx-auto space-y-8">
+    <section>
+      <h3 class="text-2xl font-bold mb-4" style="color: var(--dark-green);">تقارير أداء الطلاب</h3>
+      <table class="w-full border border-gray-300 rounded-lg text-center">
+        <thead class="bg-[var(--lime-green)] text-white">
+          <tr>
+            <th class="p-3 border border-white">اسم الطالب</th>
+            <th class="p-3 border border-white">التقدم (%)</th>
+            <th class="p-3 border border-white">الحضور (%)</th>
+            <th class="p-3 border border-white">المعدل العام</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border border-gray-300">
+            <td class="p-3 border border-gray-300">أحمد محمد</td>
+            <td class="p-3 border border-gray-300">75%</td>
+            <td class="p-3 border border-gray-300">90%</td>
+            <td class="p-3 border border-gray-300">95%</td>
+          </tr>
+          <tr class="border border-gray-300 bg-gray-50">
+            <td class="p-3 border border-gray-300">سارة محمود</td>
+            <td class="p-3 border border-gray-300">40%</td>
+            <td class="p-3 border border-gray-300">80%</td>
+            <td class="p-3 border border-gray-300">85%</td>
+          </tr>
+          <tr class="border border-gray-300">
+            <td class="p-3 border border-gray-300">خالد حسن</td>
+            <td class="p-3 border border-gray-300">90%</td>
+            <td class="p-3 border border-gray-300">95%</td>
+            <td class="p-3 border border-gray-300">98%</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h3 class="text-2xl font-bold mb-4" style="color: var(--dark-green);">إحصائيات النشاط في النظام</h3>
+      <div class="border border-gray-300 rounded-lg p-6 shadow-sm">
+        <p>عدد تسجيلات الدخول اليوم: 125</p>
+        <p>عدد المستخدمين النشطين هذا الشهر: 340</p>
+        <p>عدد المشاكل المبلغ عنها: 3</p>
+      </div>
+    </section>
+  </main>
+</section>
+
+<!-- ============================
+  Teacher Profile Page
+============================ -->
+<section id="teacher-profile" class="hidden min-h-screen bg-white">
+  <header class="bg-[var(--dark-green)] text-white p-4 flex justify-between items-center">
+    <h2 class="text-xl font-bold">الملف الشخصي</h2>
+    <nav class="space-x-4 rtl:space-x-reverse flex items-center">
+      <a href="#teacher-dashboard" class="hover:underline">الرئيسية</a>
+      <a href="#teacher-course-management" class="hover:underline">إدارة الدورات</a>
+      <a href="#teacher-student-management" class="hover:underline">إدارة الطلاب</a>
+      <a href="#teacher-quiz-builder" class="hover:underline">إنشاء الاختبارات والواجبات</a>
+      <a href="#teacher-grading" class="hover:underline">التصحيح والتقييم</a>
+      <a href="#teacher-forums-management" class="hover:underline">إدارة المنتديات</a>
+      <a href="#teacher-reports" class="hover:underline">التقارير</a>
+      <a href="#teacher-profile" class="hover:underline">الملف الشخصي</a>
+      <button id="logout-teacher-8" class="ml-4 rtl:mr-4 bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">تسجيل خروج</button>
+    </nav>
+  </header>
+  <main class="p-6 max-w-3xl mx-auto space-y-8">
+    <section class="flex flex-col items-center space-y-4">
+      <img src="https://placehold.co/150x150/png?text=صورة+شخصية+مدرس" alt="صورة شخصية مدرس" class="rounded-full border-4 border-[var(--lime-green)]" />
+      <h3 class="text-2xl font-bold" style="color: var(--dark-green);">أ. محمد علي</h3>
+      <p class="text-gray-700">البريد الإلكتروني: mohamed@example.com</p>
+    </section>
+
+    <section>
+      <h4 class="text-xl font-bold mb-4" style="color: var(--dark-green);">تعديل المعلومات</h4>
+      <form action="#" method="POST" class="space-y-6 max-w-md mx-auto">
+        <div>
+          <label for="teacher-name" class="block mb-1 font-semibold">الاسم</label>
+          <input id="teacher-name" name="teacher-name" type="text" value="أ. محمد علي" required class="w-full border border-gray-300 rounded px-3 py-2" />
+        </div>
+        <div>
+          <label for="teacher-email" class="block mb-1 font-semibold">البريد الإلكتروني</label>
+          <input id="teacher-email" name="teacher-email" type="email" value="mohamed@example.com" required class="w-full border border-gray-300 rounded px-3 py-2" />
+        </div>
+        <div>
+          <label for="teacher-phone" class="block mb-1 font-semibold">رقم الهاتف</label>
+          <input id="teacher-phone" name="teacher-phone" type="tel" placeholder="مثال: 0501234567" class="w-full border border-gray-300 rounded px-3 py-2" />
+        </div>
+        <div>
+          <label for="teacher-password" class="block mb-1 font-semibold">تغيير كلمة المرور</label>
+          <input id="teacher-password" name="teacher-password" type="password" placeholder="كلمة المرور الجديدة" class="w-full border border-gray-300 rounded px-3 py-2" />
+        </div>
+        <button type="submit" class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-6 py-2 rounded">حفظ التغييرات</button>
+      </form>
+    </section>
+  </main>
+</section>
+
+<!-- ============================
+  Admin Dashboard (Basic placeholder)
+============================ -->
+<section id="admin-dashboard" class="hidden min-h-screen bg-white">
+  <header class="bg-[var(--dark-green)] text-white p-4 flex justify-between items-center">
+    <h2 class="text-xl font-bold">لوحة تحكم الإدارة</h2>
+    <button id="logout-admin" class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">تسجيل خروج</button>
+  </header>
+  <main class="p-6 max-w-7xl mx-auto space-y-8">
+    <section>
+      <h3 class="text-2xl font-bold mb-4" style="color: var(--dark-green);">ملخص النظام</h3>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="border border-gray-300 rounded-lg p-6 shadow-sm text-center">
+          <h4 class="text-xl font-semibold">عدد المستخدمين</h4>
+          <p class="text-3xl font-bold mt-2">1200</p>
+        </div>
+        <div class="border border-gray-300 rounded-lg p-6 shadow-sm text-center">
+          <h4 class="text-xl font-semibold">عدد الدورات</h4>
+          <p class="text-3xl font-bold mt-2">35</p>
+        </div>
+        <div class="border border-gray-300 rounded-lg p-6 shadow-sm text-center">
+          <h4 class="text-xl font-semibold">الإشعارات</h4>
+          <p class="text-3xl font-bold mt-2">45</p>
+        </div>
+        <div class="border border-gray-300 rounded-lg p-6 shadow-sm text-center">
+          <h4 class="text-xl font-semibold">التقارير</h4>
+          <p class="text-3xl font-bold mt-2">12</p>
+        </div>
+      </div>
+    </section>
+    <section>
+      <h3 class="text-2xl font-bold mb-4" style="color: var(--dark-green);">إدارة المستخدمين والدورات</h3>
+      <p>وظائف الإدارة سيتم إضافتها هنا لاحقاً.</p>
+    </section>
+  </main>
+</section>
+
+<!-- ============================
+  Scripts for Navigation & Logout
+============================ -->
+<script>
+  // Simple SPA-like navigation using hashchange
+  const sections = document.querySelectorAll('section');
+  const logouts = document.querySelectorAll('[id^="logout-"]');
+  
+  function showSection(id) {
+    sections.forEach(sec => {
+      sec.classList.toggle('hidden', sec.id !== id);
+    });
+  }
+  
+  function handleLogout() {
+    alert('تم تسجيل الخروج.');
+    window.location.hash = '#login';
+  }
+  
+  window.addEventListener('hashchange', () => {
+    const hash = window.location.hash.substring(1);
+    if (!hash || hash === 'login') {
+      showSection('login');
+    } else {
+      const found = Array.from(sections).some(sec => sec.id === hash);
+      if (found) showSection(hash);
+      else showSection('login');
+    }
+  });
+  
+  // Logout buttons event
+  logouts.forEach(btn => btn.addEventListener('click', handleLogout));
+  
+  // Initial load
+  if (!window.location.hash || window.location.hash === '#login') {
+    showSection('login');
+  } else {
+    const initial = window.location.hash.substring(1);
+    const found = Array.from(sections).some(sec => sec.id === initial);
+    if (found) showSection(initial);
+    else showSection('login');
+  }
+</script>
+
 </body>
 </html>
