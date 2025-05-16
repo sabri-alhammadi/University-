@@ -1,1 +1,189 @@
-<!DOCTYPE html><html lang='ar'><head><meta charset='UTF-8'><title>لوحة الطالب</title></head><body><h1>لوحة تحكم الطالب</h1></body></html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>لوحة تحكم الطالب - نظام LMS</title>
+<style>
+  :root {
+    --dark-green: #0F5E3B;
+    --lime-green: #7DBB43;
+    --light-lime-green: #C9D94A;
+    --white-color: #FFFFFF;
+  }
+  body {
+    margin: 0; font-family: Arial, sans-serif;
+    background: var(--white-color);
+    color: var(--dark-green);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    background-color: var(--dark-green);
+    color: var(--white-color);
+    padding: 1rem 2rem;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+  }
+  main {
+    flex-grow: 1;
+    padding: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  h2 {
+    color: var(--lime-green);
+    margin-bottom: 1rem;
+    font-weight: 700;
+    font-size: 1.6rem;
+  }
+  .section {
+    margin-bottom: 3rem;
+  }
+  ul {
+    padding: 0;
+    list-style: none;
+  }
+  .course-item {
+    background-color: #f6f9f3;
+    border: 2px solid var(--light-lime-green);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .course-item a {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--dark-green);
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+  }
+  .course-item a:hover {
+    color: var(--lime-green);
+    text-decoration: underline;
+  }
+  .progress-bar {
+    background-color: var(--light-lime-green);
+    border-radius: 15px;
+    height: 18px;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 0.4rem;
+  }
+  .progress-fill {
+    background-color: var(--dark-green);
+    height: 100%;
+    border-radius: 15px 0 0 15px;
+    width: 0%;
+    transition: width 1s ease-in-out;
+  }
+  .progress-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .notifications ul li {
+    list-style: disc inside;
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+  }
+  .calendar {
+    border: 2px solid var(--dark-green);
+    border-radius: 10px;
+    background: #f8fbf1;
+    padding: 1rem 1.5rem;
+  }
+  .calendar p {
+    font-weight: 600;
+    margin: 0.5rem 0;
+  }
+  nav {
+    background: var(--light-lime-green);
+    text-align: center;
+    padding: 1rem 0;
+  }
+  nav a {
+    margin: 0 1rem;
+    font-weight: 700;
+    color: var(--dark-green);
+    text-decoration: none;
+    font-size: 1.1rem;
+  }
+  nav a:hover {
+    color: var(--lime-green);
+    text-decoration: underline;
+  }
+  @media (max-width: 768px) {
+    main {
+      padding: 1rem;
+    }
+    .course-item a {
+      font-size: 1.1rem;
+    }
+  }
+</style>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    // تفعيل عرض شريط التقدم ديناميكياً
+    document.querySelectorAll('.progress-fill').forEach(el => {
+      const width = el.dataset.progress;
+      el.style.width = width + '%';
+    });
+  });
+</script>
+</head>
+<body>
+  <header>لوحة تحكم الطالب</header>
+  <main>
+    <section class="section courses-summary">
+      <h2>ملخص الدورات الحالية</h2>
+      <ul>
+        <li class="course-item">
+          <a href="course_content.html">مقدمة في البرمجة</a>
+          <div class="progress-bar"><div class="progress-fill" data-progress="75"></div></div>
+          <span class="progress-text">تقدم: 75%</span>
+        </li>
+        <li class="course-item">
+          <a href="course_content.html">أساسيات الرياضيات</a>
+          <div class="progress-bar"><div class="progress-fill" data-progress="40"></div></div>
+          <span class="progress-text">تقدم: 40%</span>
+        </li>
+        <li class="course-item">
+          <a href="course_content.html">علوم الحاسوب</a>
+          <div class="progress-bar"><div class="progress-fill" data-progress="20"></div></div>
+          <span class="progress-text">تقدم: 20%</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="section notifications">
+      <h2>الإشعارات</h2>
+      <ul>
+        <li>واجب جديد في دورة مقدمة في البرمجة - موعد التسليم 2025-05-20</li>
+        <li>اختبار مباشر في دورة أساسيات الرياضيات يوم 2025-05-18 الساعة 3 مساءً</li>
+        <li>تم تحديث محتوى دورة علوم الحاسوب</li>
+      </ul>
+    </section>
+
+    <section class="section calendar">
+      <h2>التقويم</h2>
+      <p>18 مايو: اختبار مباشر - أساسيات الرياضيات</p>
+      <p>20 مايو: تسليم واجب - مقدمة في البرمجة</p>
+      <p>22 مايو: محاضرة مباشرة - علوم الحاسوب</p>
+    </section>
+  </main>
+
+  <nav>
+    <a href="courses.html">الدورات المسجلة</a>
+    <a href="assignments.html">الواجبات والاختبارات</a>
+    <a href="grades.html">النتائج والتقارير</a>
+    <a href="forums.html">المنتديات</a>
+    <a href="profile.html">الملف الشخصي</a>
+    <a href="login.html">تسجيل الخروج</a>
+  </nav>
+</body>
+</html>
