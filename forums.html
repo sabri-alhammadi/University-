@@ -1,1 +1,114 @@
-<!DOCTYPE html><html lang='ar'><head><meta charset='UTF-8'><title>المنتديات</title></head><body><h1>منتديات النقاش</h1></body></html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>منتديات النقاش - نظام LMS</title>
+<style>
+  :root {
+    --dark-green: #0F5E3B;
+    --lime-green: #7DBB43;
+    --light-lime-green: #C9D94A;
+    --white-color: #FFFFFF;
+  }
+  body {
+    margin: 0; font-family: Arial, sans-serif;
+    background: var(--white-color);
+    color: var(--dark-green);
+    padding: 1.5rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  h1 {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  li.forum-topic {
+    border: 2px solid var(--lime-green);
+    background: #f6faf1;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    padding: 1rem 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  li.forum-topic:hover {
+    background-color: var(--light-lime-green);
+  }
+  li.forum-topic > h3 {
+    margin: 0 0 0.5rem 0;
+  }
+  li.forum-topic > p {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+  .new-topic {
+    display: block;
+    margin-bottom: 1.5rem;
+    background-color: var(--dark-green);
+    color: var(--white-color);
+    padding: 0.7rem 1.2rem;
+    width: max-content;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+  }
+  .new-topic:hover {
+    background-color: var(--lime-green);
+  }
+  nav {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  nav a {
+    margin: 0 1rem;
+    color: var(--lime-green);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 1.1rem;
+  }
+  nav a:hover {
+    text-decoration: underline;
+  }
+  @media (max-width: 600px) {
+    body {
+      padding: 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+  <h1>منتديات النقاش</h1>
+
+  <a href="#" class="new-topic">إنشاء موضوع جديد</a>
+
+  <ul>
+    <li class="forum-topic" tabindex="0">
+      <h3>مناقشة حول مشروع البرمجة</h3>
+      <p>طالب 1: هل يمكننا استخدام مكتبات خارجية في المشروع؟</p>
+    </li>
+    <li class="forum-topic" tabindex="0">
+      <h3>مساعدة في الواجب الرياضي</h3>
+      <p>طالب 2: لدي صعوبة في فهم مسائل الجبر.</p>
+    </li>
+    <li class="forum-topic" tabindex="0">
+      <h3>نصائح للاختبارات القادمة</h3>
+      <p>طالب 3: هل هناك مصادر تساعد على التحضير بشكل أفضل؟</p>
+    </li>
+  </ul>
+
+  <nav>
+    <a href="student_dashboard.html">لوحة تحكم الطالب</a>
+    <a href="courses.html">الدورات المسجلة</a>
+    <a href="assignments.html">الواجبات والاختبارات</a>
+    <a href="grades.html">النتائج والتقارير</a>
+    <a href="profile.html">الملف الشخصي</a>
+    <a href="login.html">تسجيل الخروج</a>
+  </nav>
+</body>
+</html>
