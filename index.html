@@ -1,1 +1,115 @@
-<!DOCTYPE html><html lang='ar'><head><meta charset='UTF-8'><title>تسجيل الدخول</title></head><body><h1>تسجيل الدخول</h1></body></html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>تسجيل الدخول - نظام LMS</title>
+<style>
+  :root {
+    --dark-green: #0F5E3B;
+    --lime-green: #7DBB43;
+    --light-lime-green: #C9D94A;
+    --white-color: #FFFFFF;
+  }
+  body {
+    margin: 0; font-family: Arial, sans-serif;
+    background: var(--light-lime-green);
+    display: flex; justify-content: center; align-items: center; min-height: 100vh;
+  }
+  form {
+    background: var(--white-color);
+    padding: 2rem; border-radius: 10px;
+    width: 350px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.15);
+  }
+  h2 {
+    color: var(--dark-green);
+    text-align: center;
+    margin-bottom: 1.8rem;
+    font-weight: 700;
+    font-size: 1.8rem;
+  }
+  label {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: var(--dark-green);
+    font-weight: 600;
+  }
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 0.6rem;
+    margin-bottom: 1.3rem;
+    border: 2px solid var(--lime-green);
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  input[type="text"]:focus,
+  input[type="password"]:focus {
+    border-color: var(--dark-green);
+    outline: none;
+  }
+  .options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--dark-green);
+  }
+  .options label {
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+  }
+  .options input[type="checkbox"] {
+    margin-left: 6px;
+    width: 16px; height: 16px;
+  }
+  .options a {
+    color: var(--lime-green);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .options a:hover {
+    text-decoration: underline;
+  }
+  button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--dark-green);
+    border: none;
+    border-radius: 7px;
+    color: var(--white-color);
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: var(--lime-green);
+  }
+  @media (max-width: 400px) {
+    form { width: 90%; padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+  <form action="student_dashboard.html" method="get" autocomplete="off">
+    <h2>تسجيل الدخول</h2>
+    <label for="user">البريد الإلكتروني / اسم المستخدم</label>
+    <input id="user" name="user" type="text" placeholder="أدخل البريد أو اسم المستخدم" required />
+
+    <label for="pass">كلمة المرور</label>
+    <input id="pass" name="pass" type="password" placeholder="أدخل كلمة المرور" required />
+
+    <div class="options">
+      <label><input type="checkbox" name="remember" /> تذكّرني</label>
+      <a href="#">نسيت كلمة المرور؟</a>
+    </div>
+
+    <button type="submit">دخول</button>
+  </form>
+</body>
+</html>
