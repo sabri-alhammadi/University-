@@ -35,7 +35,7 @@
 <section id="login" class="min-h-screen flex items-center justify-center bg-white px-4">
   <div class="max-w-md w-full border border-gray-300 rounded-lg shadow-lg p-8">
     <h1 class="text-3xl font-bold mb-6 text-center" style="color: var(--dark-green);">تسجيل الدخول</h1>
-    <form class="space-y-5" action="#" method="Post" autocomplete="off">
+    <form class="space-y-5" method="Post" autocomplete="off">
       <div>
         <label for="email" class="block mb-1 font-semibold">البريد الإلكتروني / اسم المستخدم</label>
         <input id="email" name="email" type="text" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-lime-500" />
@@ -1294,6 +1294,31 @@
     if (found) showSection(initial);
     else showSection('login');
   }
+</script>
+<script>
+  const loginForm = document.querySelector('form');
+
+  loginForm.addEventListener('submit', function(e) {
+    e.preventDefault(); // يمنع تحميل الصفحة الافتراضي
+
+    const email = loginForm.email.value.trim();
+    const password = loginForm.password.value.trim();
+
+    // تحقق بسيط (عدل حسب بياناتك)
+    if(email === "student@example.com" && password === "1234") {
+      alert("تم تسجيل الدخول كطالب");
+      // إخفاء صفحة الدخول
+      document.getElementById('login').classList.add('hidden');
+      // إظهار لوحة تحكم الطالب
+      document.getElementById('student-dashboard').classList.remove('hidden');
+    } else if(email === "teacher@example.com" && password === "1234") {
+      alert("تم تسجيل الدخول كمدرس");
+      document.getElementById('login').classList.add('hidden');
+      document.getElementById('teacher-dashboard').classList.remove('hidden');
+    } else {
+      alert("بيانات الدخول غير صحيحة");
+    }
+  });
 </script>
 
 </body>
