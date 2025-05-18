@@ -59,19 +59,25 @@
 <!-- ============================
   Student Dashboard
 ============================ -->
-<section id="student-dashboard" class="hidden min-h-screen bg-white">
-  <header class="bg-[var(--dark-green)] text-white p-4 flex justify-between items-center">
+<header class="bg-[var(--dark-green)] text-white p-4">
+  <div class="flex items-center justify-between flex-wrap">
     <h2 class="text-xl font-bold">لوحة تحكم الطالب</h2>
-    <nav class="space-x-4 rtl:space-x-reverse flex items-center">
-      <a href="#student-dashboard" class="hover:underline">الرئيسية</a>
-      <a href="#student-courses" class="hover:underline">الدورات</a>
-      <a href="#student-assignments" class="hover:underline">الواجبات والاختبارات</a>
-      <a href="#student-grades" class="hover:underline">النتائج</a>
-      <a href="#student-forums" class="hover:underline">المنتديات</a>
-      <a href="#student-profile" class="hover:underline">الملف الشخصي</a>
-      <button id="logout-student" class="ml-4 rtl:mr-4 bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-3 py-1 rounded">تسجيل خروج</button>
-    </nav>
-  </header>
+    <button id="menu-toggle" class="md:hidden">
+      <i class="fas fa-bars text-2xl"></i>
+    </button>
+  </div>
+
+  <nav id="mobile-menu" class="hidden md:flex flex-col md:flex-row mt-4 md:mt-0 space-y-3 md:space-y-0 md:space-x-4 rtl:md:space-x-reverse">
+    <a href="#student-dashboard" class="hover:underline">الرئيسية</a>
+    <a href="#student-courses" class="hover:underline">الدورات</a>
+    <a href="#student-assignments" class="hover:underline">الواجبات والاختبارات</a>
+    <a href="#student-grades" class="hover:underline">النتائج</a>
+    <a href="#student-forums" class="hover:underline">المنتديات</a>
+    <a href="#student-profile" class="hover:underline">الملف الشخصي</a>
+    <button id="logout-student" class="bg-[var(--lime-green)] hover:bg-[var(--light-lime-green)] text-white px-4 py-1 rounded">تسجيل خروج</button>
+  </nav>
+</header>
+
   <main class="p-6 max-w-7xl mx-auto space-y-8">
     <!-- Summary of current courses with progress -->
     <section>
@@ -1318,6 +1324,11 @@
     } else {
       alert("بيانات الدخول غير صحيحة");
     }
+  });
+</script>
+<script>
+  document.getElementById("menu-toggle").addEventListener("click", () => {
+    document.getElementById("mobile-menu").classList.toggle("hidden");
   });
 </script>
 
